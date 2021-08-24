@@ -79,8 +79,8 @@ const findViewSpot = (data: meshDataType) => {
                 const neighborElementValue = valuesMap[neighborElementId];
 
                 // build an edge
-                isConnected[elementId-neighborElementId] = true;
-                isConnected[neighborElementId-elementId] = true;
+                isConnected[`${elementId},${neighborElementId}`] = true;
+                isConnected[`${neighborElementId},${elementId}`] = true;
 
                 if (neighborElementValue > elementValue) {
                     isLocalMaxima = false;
@@ -109,8 +109,8 @@ const findViewSpot = (data: meshDataType) => {
             const elementId1 = localMaximaSorted[i].element_id;
             const elementId2 = localMaximaSorted[i + 1].element_id;
 
-            if (isConnected[elementId1-elementId2] !== undefined) {
-                if (isConnected[elementId1-elementId2] === true) {
+            if (isConnected[`${elementId1},${elementId2}`] !== undefined) {
+                if (isConnected[`${elementId1},${elementId2}`]) {
                     // do nothing
                 } else {
                     finalLocalMaxima.push(localMaximaSorted[i]);
